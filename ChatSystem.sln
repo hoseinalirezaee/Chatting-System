@@ -9,11 +9,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientTest", "ClientTest\Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageTransfer", "MessageTransfer\MessageTransfer.csproj", "{3110AD8A-5D4E-4A9D-9F88-EE5218C82D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerImp", "ServerImp\ServerImp.csproj", "{C65631BB-5A29-4B07-8F53-ED9ADA746B29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerImp", "ServerImp\ServerImp.csproj", "{C65631BB-5A29-4B07-8F53-ED9ADA746B29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserImp", "UserImp\UserImp.csproj", "{D5595DCB-35F2-4B08-9F20-BE0FCE85C122}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserImp", "UserImp\UserImp.csproj", "{D5595DCB-35F2-4B08-9F20-BE0FCE85C122}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperatorImp", "OperatorImp\OperatorImp.csproj", "{1D057156-9F2D-444D-A944-2D98A2F55611}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OperatorImp", "OperatorImp\OperatorImp.csproj", "{1D057156-9F2D-444D-A944-2D98A2F55611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConsole", "ClientConsole\ClientConsole.csproj", "{D8269509-D137-4D4C-9A2F-AEB9B223D2BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerConsole", "ServerConsole\ServerConsole.csproj", "{8CE8AA1A-2FA8-4067-8522-BCB5BB94CF47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperatorConsole", "OperatorConsole\OperatorConsole.csproj", "{68A1ED7E-39FE-4B39-916A-D0174200A728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer", "Customer\Customer.csproj", "{139D319B-FCF6-4184-BBA4-9A539A5FD1D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operator", "Operator\Operator.csproj", "{64369D73-89E4-4772-A64C-B451A47B7A2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +55,26 @@ Global
 		{1D057156-9F2D-444D-A944-2D98A2F55611}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D057156-9F2D-444D-A944-2D98A2F55611}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D057156-9F2D-444D-A944-2D98A2F55611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8269509-D137-4D4C-9A2F-AEB9B223D2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8269509-D137-4D4C-9A2F-AEB9B223D2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8269509-D137-4D4C-9A2F-AEB9B223D2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8269509-D137-4D4C-9A2F-AEB9B223D2BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CE8AA1A-2FA8-4067-8522-BCB5BB94CF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE8AA1A-2FA8-4067-8522-BCB5BB94CF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE8AA1A-2FA8-4067-8522-BCB5BB94CF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE8AA1A-2FA8-4067-8522-BCB5BB94CF47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A1ED7E-39FE-4B39-916A-D0174200A728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A1ED7E-39FE-4B39-916A-D0174200A728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A1ED7E-39FE-4B39-916A-D0174200A728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A1ED7E-39FE-4B39-916A-D0174200A728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139D319B-FCF6-4184-BBA4-9A539A5FD1D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139D319B-FCF6-4184-BBA4-9A539A5FD1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139D319B-FCF6-4184-BBA4-9A539A5FD1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139D319B-FCF6-4184-BBA4-9A539A5FD1D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64369D73-89E4-4772-A64C-B451A47B7A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64369D73-89E4-4772-A64C-B451A47B7A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64369D73-89E4-4772-A64C-B451A47B7A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64369D73-89E4-4772-A64C-B451A47B7A2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

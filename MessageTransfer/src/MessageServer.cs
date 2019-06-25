@@ -36,7 +36,7 @@ namespace MessageTransfer
         {
             clients = new ConcurrentDictionary<IPEndPoint, ClientInfo>();
 
-            IPEndPoint localEP = new IPEndPoint(IPAddress.Any, port);
+            IPEndPoint localEP = new IPEndPoint(IPAddress.Loopback, port);
             listenerSocket = new TcpListener(localEP);
         }
 
@@ -72,7 +72,7 @@ namespace MessageTransfer
                     list.Add(item.Value.ClientSocket.Client);
                 }
 
-                Socket.Select(list, null, null, -1);
+                Socket.Select(list, null, null, 1000);
 
                 foreach (var item in list)
                 {
@@ -126,7 +126,7 @@ namespace MessageTransfer
 
         static int FreeTcpPort()
         {
-            TcpListener l = new TcpListener(IPAddress.Loopback, 0);
+            TcpListener l = new TcpListener(IPAddress.Any, 0);
             l.Start();
             int port = ((IPEndPoint)l.LocalEndpoint).Port;
             l.Stop();

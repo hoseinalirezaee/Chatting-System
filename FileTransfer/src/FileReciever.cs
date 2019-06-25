@@ -11,6 +11,12 @@ namespace FileTransfer
     {
         private int port = -1;
 
+        public FileInfo File
+        {
+            get;
+            private set;
+        } = null;
+
         /// <summary>
         /// Create an instance of <see cref="FileReciever"/> for listening on specified port.
         /// </summary>
@@ -72,6 +78,8 @@ namespace FileTransfer
             recieverSocket.Close();
             fileStream.Close();
 
+            File = new FileInfo(filePath);
+
             return true;
         }
 
@@ -100,11 +108,11 @@ namespace FileTransfer
 
         private TcpClient AcceptConnection(IPEndPoint remoteEndPoint)
         {
-            TcpListener listener = new TcpListener(IPAddress.Any, port);
+            TcpListener listener = new TcpListener(IPAddress.Loopback, port);
             listener.Start();
             TcpClient recieverSocket = listener.AcceptTcpClient();
-            if (!recieverSocket.Client.RemoteEndPoint.Equals(remoteEndPoint as EndPoint))
-                return null;
+            //if (!recieverSocket.Client.RemoteEndPoint.Equals(remoteEndPoint as EndPoint))
+                //return null;
             return recieverSocket;
         }
 

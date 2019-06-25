@@ -44,6 +44,10 @@ namespace ServerImp
                     UserName = request.UserName
                 };
                 penddingUsers.Enqueue(user);
+
+                Console.WriteLine("P2P request from {0}: Name: {1}, User ID: {2}, Email: {3}",
+                    endPoint.ToString(), user.UserName, user.UserID, user.UserEmail);
+
                 SendConnectionInfoToUser();
             }
             else if (message is ReadyRequest)
@@ -57,6 +61,9 @@ namespace ServerImp
                     State = 0
                 };
                 readyOperators.Enqueue(@operator);
+                Console.WriteLine("Ready request from {0}, End Point: {1}",
+                    @operator.OperatorID, @operator.EndPoint.ToIPEndPoint().ToString());
+                messageServer.CloseConnection(endPoint);
                 SendConnectionInfoToUser();
             }
             else
@@ -82,6 +89,9 @@ namespace ServerImp
                 };
 
                 messageServer.SendMessage(p2PResponse, userEndPoint.ToIPEndPoint());
+                Console.WriteLine("P2P responde sent to user {0}, {1}",
+                    user.UserName, user.EndPoint.ToIPEndPoint().ToString());
+                messageServer.CloseConnection(userEndPoint.ToIPEndPoint());
             }
         }
 

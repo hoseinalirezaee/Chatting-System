@@ -17,6 +17,14 @@ namespace MessageTransfer
         private MessageReceiver receiver = null;
         private Thread receiveThread = null;
 
+        public IPEndPoint RemoteEndPoint
+        {
+            get
+            {
+                return remoteEndPoint;
+            }
+        }
+
         public event MessageReceivedCallback MessageReceived;
 
         public void Connect(IPEndPoint remoteEndPoint)
@@ -47,12 +55,24 @@ namespace MessageTransfer
                 list.Add(this.clientSocket.Client);
                 Socket.Select(list, null, null, -1);
 
+                if (!list[0].Connected)
+                {
+                    return;
+                }
                 if (list[0].Available == 0)
-                    throw new RemoteClientShutDown();
+                {
+                    clientSocket.Close();
+                    return;
+                }
 
                 var message = receiver.ReceiveMessage();
                 MessageReceived?.Invoke(message, clientSocket.Client.RemoteEndPoint as IPEndPoint);
             }
+        }
+
+        public void CloseConnection()
+        {
+            this.clientSocket.Close();
         }
     }
 }

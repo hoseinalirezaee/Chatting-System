@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CBC6AF59-52B8-44DC-8020-ED34716EF21F}</ProjectGuid>
+    <ProjectGuid>{8CE8AA1A-2FA8-4067-8522-BCB5BB94CF47}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Server</RootNamespace>
-    <AssemblyName>Server</AssemblyName>
+    <RootNamespace>ServerConsole</RootNamespace>
+    <AssemblyName>ServerConsole</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MessageTransfer\MessageTransfer.csproj">
-      <Project>{3110ad8a-5d4e-4a9d-9f88-ee5218c82d54}</Project>
-      <Name>MessageTransfer</Name>
+    <ProjectReference Include="..\ServerImp\ServerImp.csproj">
+      <Project>{c65631bb-5a29-4b07-8f53-ed9ada746b29}</Project>
+      <Name>ServerImp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

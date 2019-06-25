@@ -8,7 +8,7 @@ namespace MessageTransfer.Messages
     {
         
         public string FileName { get; set; }
-        public ulong Size { get; set; }
+        public long Size { get; set; }
         public int ID { get; set; }
 
         public override int Type => 1;
