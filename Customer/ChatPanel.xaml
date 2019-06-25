@@ -9,7 +9,8 @@
              Background="White">
     <Grid>
         <DockPanel Margin="50">
-            <DockPanel DockPanel.Dock="Bottom">
+            <TextBlock x:Name="waitText" Text="Please wait, connecting to operator..." DockPanel.Dock="Top" HorizontalAlignment="Center"/>
+            <DockPanel x:Name="messagePanel" DockPanel.Dock="Bottom" IsEnabled="False">
                 <Button Content="SendFile" DockPanel.Dock="Right" Click="SendFileButtonClicked" Margin="5"/>
                 <Button Content="Send" DockPanel.Dock="Right" Click="SendButtonClicked" Margin="5"/>
                 <TextBox x:Name="textBox" Margin="5"/>

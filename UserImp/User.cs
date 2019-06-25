@@ -119,6 +119,13 @@ namespace UserImp
                 var response = message as P2PResponse;
                 var operatorEndPoint = response.ListeningEndPoint;
                 messageClientToOperator.Connect(operatorEndPoint.ToIPEndPoint());
+
+                Introduction introduction = new Introduction
+                {
+                    Name = Name
+                };
+
+                SendMessage(introduction);
             }
         }
 

@@ -18,6 +18,7 @@ namespace MessageTransfer.Messages
     [XmlInclude(typeof(StartupResponse))]
     [XmlInclude(typeof(VerificationRequest))]
     [XmlInclude(typeof(VerificationResponse))]
+    [XmlInclude(typeof(Introduction))]
     public abstract class Message
     {
         public abstract int Type

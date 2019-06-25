@@ -23,8 +23,9 @@ using System.Diagnostics;
 namespace Operator
 {
     
-    public delegate void AddTextMessage(TextMessage textMessage);
-    public delegate void AddFileMessage(FileMessage fileMessage);
+    public delegate void AddTextMessage(TextMessage textMessage, string ownerName);
+    public delegate void AddFileMessage(FileMessage fileMessage, string ownerName);
+    public delegate void SetUserName(string name);
 
     public partial class ChatPanel : UserControl
     {
@@ -42,6 +43,24 @@ namespace Operator
             return (@byte / (1024 * 1024.0)).ToString("0.00") + " MB";
         }
 
+        private string userName = "";
+        public void SetUserName(string name)
+        {
+            this.userName = name;
+        }
+
+        public void Init()
+        {
+            waitText.Text = "";
+            messagePanel.IsEnabled = true;
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = this.userName + " joied the chat.";
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
+            stackPanel.Children.Add(textBlock);
+            chatContent.Add(stackPanel);
+        }
 
         private ObservableCollection<FrameworkElement> chatContent = new ObservableCollection<FrameworkElement>();
         private OperatorImp.Operator @operator = null;
@@ -53,14 +72,43 @@ namespace Operator
             chatCon.ItemsSource = chatContent;
         }
 
-        public void AddFileMessage(FileMessage fileMessage)
+        public void AddFileMessage(FileMessage fileMessage, string ownerName)
         {
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+            TextBlock textBlock = new TextBlock();
+            textBlock.Inlines.Add(new Run(ownerName + ": ") { Foreground = new SolidColorBrush(Colors.Red)});
+            stackPanel.Children.Add(textBlock);
+
             Button button = new Button();
             button.Content = fileMessage.FileName + " (" + ByteTo(fileMessage.Size) + ")";
             button.Tag = fileMessage.ID;
             button.Click += RecevieFileBtnClicked;
-            chatContent.Add(button);
+
+            textBlock.VerticalAlignment = VerticalAlignment.Center;
+            button.VerticalAlignment = VerticalAlignment.Center;
+            stackPanel.Children.Add(button);
+            chatContent.Add(stackPanel);
         }
+        public void AddTextMessage(TextMessage textMessage, string ownerName)
+        {
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+            stackPanel.VerticalAlignment = VerticalAlignment.Center;
+            TextBlock tbName = new TextBlock();
+            tbName.Inlines.Add(new Run(ownerName + ": ") { Foreground = new SolidColorBrush(Colors.Red) });
+            stackPanel.Children.Add(tbName);
+
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = textMessage.Text;
+
+            textBlock.VerticalAlignment = VerticalAlignment.Center;
+            tbName.VerticalAlignment = VerticalAlignment.Center;
+
+            stackPanel.Children.Add(textBlock);
+            chatContent.Add(stackPanel);
+        }
+
 
         private void RecevieFileBtnClicked(object sender, RoutedEventArgs e)
         {
@@ -85,12 +133,7 @@ namespace Operator
             }
         }
 
-        public void AddTextMessage(TextMessage textMessage)
-        {
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = textMessage.Text;
-            chatContent.Add(textBlock);
-        }
+        
 
         private void SendButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -104,7 +147,7 @@ namespace Operator
                 };
                 textBox.Text = String.Empty;
                 @operator.SendMessage(textMessage);
-                AddTextMessage(textMessage);
+                AddTextMessage(textMessage, @operator.Name);
             }
         }
 
@@ -122,28 +165,35 @@ namespace Operator
                     ID = id,
                     Size = file.Length
                 };
-                AddFileMessage(fileMessage);
+                AddFileMessage(fileMessage, @operator.Name);
             }
         }
 
-        public void Connect(int id)
+        public void Connect(int id, string name)
         {
             @operator = new OperatorImp.Operator(id);
+            @operator.Name = name;
             @operator.MessageReceived += User_MessageReceived;
             @operator.ConnectToUser(serverEndPoint);
         }
 
         private void User_MessageReceived(Message message)
         {
-            if (message is TextMessage)
+            if (message is Introduction)
+            {
+                SetUserName setUserName = SetUserName;
+                Dispatcher.Invoke(setUserName, (message as Introduction).Name);
+                Dispatcher.Invoke(Init);
+            }
+            else if (message is TextMessage)
             {
                 AddTextMessage addTextMessageDele = AddTextMessage;
-                Dispatcher.Invoke(addTextMessageDele, message as TextMessage);
+                Dispatcher.Invoke(addTextMessageDele, message as TextMessage, userName);
             }
             else if (message is FileMessage)
             {
                 AddFileMessage addFileMessageDele = AddFileMessage;
-                Dispatcher.Invoke(addFileMessageDele, message as FileMessage);
+                Dispatcher.Invoke(addFileMessageDele, message as FileMessage, userName);
             }
         }
     }

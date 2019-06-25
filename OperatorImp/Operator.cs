@@ -22,6 +22,13 @@ namespace OperatorImp
             get;
             private set;
         }
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        private string nameOfUser = "";
 
         private MessageServer messageServer = null;
         private MessageClient messageClient = null;
@@ -88,7 +95,14 @@ namespace OperatorImp
                     lastFileIndex = fileMessage.ID;
                 }
             }
-
+            if (message is Introduction)
+            {
+                Introduction intro = new Introduction
+                {
+                    Name = Name
+                };
+                SendMessage(intro);
+            }
             if (message is FileRequest)
             {
                 var fileRequest = message as FileRequest;
@@ -150,7 +164,7 @@ namespace OperatorImp
             filesList[id] = fileReciever.File;
         }
 
-        public int GetRandomPort()
+        private int GetRandomPort()
         {
             TcpListener listener = new TcpListener(IPAddress.Loopback, 0);
             listener.Start();

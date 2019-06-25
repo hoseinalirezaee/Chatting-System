@@ -27,7 +27,7 @@ namespace Operator
         }
         private void ConnectButtonClicked(object sender, RoutedEventArgs e)
         {
-            chatPanel.Connect(int.Parse(idText.Text));
+            chatPanel.Connect(int.Parse(idText.Text), nameText.Text);
             chatPanel.Visibility = Visibility.Visible;
         }
     }
